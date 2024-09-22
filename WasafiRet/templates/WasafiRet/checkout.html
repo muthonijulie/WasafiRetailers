@@ -1,0 +1,62 @@
+{% extends 'WasafiRet/base.html' %}
+{% load static %}
+
+{% block title %}Checkout - Wasafi Ret{% endblock %}
+
+{% block content %}
+    <h1>Checkout</h1>
+    <form>
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Shipping Address</label>
+            <textarea class="form-control" id="address" name="address" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" name="city" required>
+        </div>
+        <div class="form-group">
+            <label for="zip">Zip Code</label>
+            <input type="text" class="form-control" id="zip" name="zip" required>
+        </div>
+
+        <h3>Your Cart</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Product 1</td>
+                    <td>$19.99</td>
+                    <td>1</td>
+                    <td>$19.99</td>
+                </tr>
+                <tr>
+                    <td>Product 2</td>
+                    <td>$29.99</td>
+                    <td>1</td>
+                    <td>$29.99</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Total</td>
+                    <td>$49.98</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-success">Place Order</button>
+    </form>
+{% endblock %}
