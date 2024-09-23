@@ -123,7 +123,7 @@ STATIC_URL = '/static/'
 
 # GLOBAL STATIC ROUTES
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'WasafiRet',"static")]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
