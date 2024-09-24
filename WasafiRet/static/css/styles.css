@@ -1,0 +1,89 @@
+/* Overall background color with a gradient purple touch */
+body {
+    background: linear-gradient(135deg, #f3e6ff 0%, #e0bbff 100%); /* Gradient purple */
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Header styling */
+header {
+    background-color: #6a0dad; /* Dark purple */
+    padding: 20px 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.nav-link:hover {
+    color: #d4af37 !important;
+}
+
+/* Main container styles */
+main.container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+/* Section Title Styling */
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #6a0dad;
+    margin-bottom: 40px;
+}
+
+/* Card styles for product display */
+.card {
+    border: none;
+    background-color: #faf5ff;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 8px 25px rgba(106, 13, 173, 0.3);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: #6a0dad;
+}
+
+.card-text {
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background-color: #6a0dad;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #5a099d;
+}
+
+/* Footer styling */
+footer {
+    background-color: #6a0dad;
+    color: #fff;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+}
