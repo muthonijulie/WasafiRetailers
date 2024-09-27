@@ -1,0 +1,31 @@
+{% extends 'WasafiRet/base.html' %}
+{% load static %}
+
+{% block title %}Shopping Cart - Wasafi Ret{% endblock %}
+
+{% block content %}
+<h1>Your Cart</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Product 1</td>
+            <td>$19.99</td>
+            <td>1</td>
+            <td>$19.99</td>
+            <td><a href="#" class="btn btn-danger">Remove</a></td>
+        </tr>
+        <!-- Repeat for other cart items -->
+    </tbody>
+</table>
+<h3>Total: $19.99</h3>
+<a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
+{% endblock %}
