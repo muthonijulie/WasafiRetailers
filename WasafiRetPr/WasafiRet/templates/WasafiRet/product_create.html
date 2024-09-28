@@ -1,0 +1,11 @@
+{% extends 'WasafiRet/base.html' %} {% load static %} {% block title %}Product
+Detail - Wasafi Ret{% endblock %} {% block content %}
+<h1>Product Create</h1>
+
+<h1>Add New Product</h1>
+<form method="POST">
+  {% csrf_token %} {{ form.as_p }}
+  <!-- Renders the form fields -->
+  <button type="submit">Save</button>
+</form>
+{% endblock %}
