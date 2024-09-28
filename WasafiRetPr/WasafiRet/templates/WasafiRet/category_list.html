@@ -1,0 +1,10 @@
+{% extends 'WasafiRet/base.html' %} {% load static %} {% block title %}Product
+Detail - Wasafi Ret{% endblock %} {% block content %}
+<h1>Category List</h1>
+<a href="{% url 'category_create' %}">Add New Category</a>
+<ul>
+  {% for category in categories %}
+  <li>{{ category.name }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}
