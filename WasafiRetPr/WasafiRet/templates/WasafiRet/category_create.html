@@ -3,7 +3,7 @@ Detail - Wasafi Ret{% endblock %} {% block content %}
 <h1>Add New Category</h1>
 <form method="POST">
   {% csrf_token %} {{ form.as_p }}
-  <!-- Renders the form fields -->
+
   <button type="submit">Save</button>
 </form>
 {% endblock %}

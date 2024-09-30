@@ -1,31 +1,64 @@
-{% extends 'WasafiRet/base.html' %}
-{% load static %}
+{% extends 'WasafiRet/base.html' %} {% load static %} {% block title %}Shopping
+Cart - Wasafi Ret{% endblock %} {% block content %}
+<div class="container mt-5">
+  <h1>Your Cart</h1>
 
-{% block title %}Shopping Cart - Wasafi Ret{% endblock %}
+  {% if cart_items %}
+  <ul class="list-group mb-5">
+    {% for item in cart_items %}
+    <li class="list-group-item mb-3">
+      <div class="row">
+        <div class="col-md-4">
+          {% if item.product.image %}
+          <img
+            src="{{ item.product.image.url }}"
+            class="img-fluid rounded"
+            alt="{{ item.product.name }}"
+            style="max-height: 300px"
+          />
+          {% else %}
+          <img
+            src="{% static 'images/default-product.jpg' %}"
+            class="img-fluid rounded"
+            alt="Default Product Image"
+            style="max-height: 300px"
+          />
+          {% endif %}
+        </div>
 
-{% block content %}
-<h1>Your Cart</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Product 1</td>
-            <td>$19.99</td>
-            <td>1</td>
-            <td>$19.99</td>
-            <td><a href="#" class="btn btn-danger">Remove</a></td>
-        </tr>
-       
-    </tbody>
-</table>
-<h3>Total: $19.99</h3>
-<a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
+        <!-- Product Details -->
+        <div class="col-md-8">
+          <h3>{{ item.product.name }}</h3>
+          <h4>${{ item.product.price }}</h4>
+          <p>{{ item.product.description }}</p>
+          <ul class="list-unstyled">
+            {% if item.product.feature_1 %}
+            <li><strong>Feature 1:</strong> {{ item.product.feature_1 }}</li>
+            {% endif %} {% if item.product.feature_2 %}
+            <li><strong>Feature 2:</strong> {{ item.product.feature_2 }}</li>
+            {% endif %} {% if item.product.feature_3 %}
+            <li><strong>Feature 3:</strong> {{ item.product.feature_3 }}</li>
+            {% endif %}
+          </ul>
+          {% comment %} add review functionality {% endcomment %}
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <div class="text-right">
+    <a href="{% url 'checkout' %}" class="btn btn-success btn-lg"
+      >Proceed to Checkout</a
+    >
+  </div>
+
+  {% else %}
+  <div class="alert alert-warning">
+    <strong>Your cart is empty.</strong> Start adding some products!
+  </div>
+  {% endif %}
+</div>
+<h3>Total:${{cart_total}}</h3>
+<a href="{% url 'product_list' %}">Continue shopping</a>
 {% endblock %}
