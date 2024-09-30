@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import Product,Category,Cart,CartItem
 from .forms import ProductCreateForm,CategoryForm
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+from django.http import HttpResponseBadRequest
 
 # Create your views here.
 def Home(request):
@@ -22,8 +24,17 @@ def category_create(request):
       return render(request,'WasafiRet/category_form.html',{'form':form})
 def product_list(request):
     products=Product.objects.all()
+    paginator=Paginator(products,10,orphans=10,allow_empty_first_page=True)
+    page=request.GET.get('page')
+    try:
+         paginated_products=paginator.page(page)
+    except PageNotAnInteger:
+         paginated_products=paginator.page(1)
+    except EmptyPage:
+         paginated_products=paginator.page(paginator.num_pages)
 
-    return render(request, 'WasafiRet/product.html',{'products':products})
+         
+    return render(request, 'WasafiRet/product.html',{'products':paginated_products})
 
 def product_create(request):
     if request.method == 'POST':
@@ -56,6 +67,29 @@ def add_to_cart(request,product_id):
 
      cart_item.save()
      return redirect('view_cart')
+def update_cart(request,cart_item_id):
+     cart_item=get_object_or_404(CartItem,id=cart_item_id)
+     
+     if request.method =='POST':
+          new=int(request.POST.get('quantity',0))
+          if new>0:
+               cart_item.quantity=new
+               cart_item.save()
+          else:
+               return HttpResponseBadRequest("Invalid quantity")
+          return redirect('view_cart')
+     return HttpResponseBadRequest("Invalid request method")
+def remove_cart(request,cart_item_id):
+  
+     cart_item=get_object_or_404(CartItem,id=cart_item_id)
+
+     
+     if request.method in ['POST','GET']:
+        cart_item.delete()
+     
+        return redirect('view_cart')
+     return HttpResponseBadRequest("Invalid request method")
+    
 
 def checkout(request):
     return render(request, 'WasafiRet/checkout.html')
