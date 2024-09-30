@@ -40,10 +40,33 @@ Cart - Wasafi Ret{% endblock %} {% block content %}
             <li><strong>Feature 3:</strong> {{ item.product.feature_3 }}</li>
             {% endif %}
           </ul>
+          <form
+            method="POST"
+            action="{% url 'update_cart' item.id %}"
+            style="display: inline"
+          >
+            {% csrf_token %}
+            <input
+              type="number"
+              name="quantity"
+              value="{{ item.quantity }}"
+              min="1"
+            />
+            <button type="submit">Update</button>
+          </form>
+          <div class="text-right">
+            <a
+              href="{% url 'remove_cart' item.id %}"
+              class="btn btn-danger btn-lg"
+              >Remove</a
+            >
+          </div>
+
           {% comment %} add review functionality {% endcomment %}
         </div>
       </div>
     </li>
+
     {% endfor %}
   </ul>
 
