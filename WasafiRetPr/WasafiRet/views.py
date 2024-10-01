@@ -37,13 +37,23 @@ def product_create(request):
 
 
     return render(request, 'WasafiRet/product_create.html',{'form':form})
-
+def search(request):
+     search_query=request.GET.get('search','')
+    
+     product=Product.objects.filter(name__icontains=search_query)
+     context={
+          'product':product,
+          'search_query':search_query,
+     }
+     return render(request,'WasafiRet/product.html',context)
+    
 def view_cart(request):
     cart=Cart.objects.filter(user=request.user).first()
     cart_items=CartItem.objects.filter(cart=cart)
 
     cart_total=sum(item.get_total() for item in cart_items)
     return render(request, 'WasafiRet/cart.html', {'cart_items':cart_items, 'cart_total':cart_total})
+
 def add_to_cart(request,product_id):
      product=Product.objects.get(id=product_id)
      cart,created=Cart.objects.get_or_create(user=request.user)

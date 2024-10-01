@@ -25,6 +25,15 @@
               <a class="nav-link" href="{% url 'view_cart' %}">Cart</a>
             </li>
           </ul>
+          <form method="POST" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input
+              type="text"
+              name="search_query"
+              placeholder="Search products"
+            />
+            <button class="fas fa-search" type="submit">Search</button>
+          </form>
         </div>
       </nav>
     </header>
