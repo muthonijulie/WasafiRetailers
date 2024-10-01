@@ -39,11 +39,13 @@ def product_create(request):
     return render(request, 'WasafiRet/product_create.html',{'form':form})
 def search(request):
      search_query=request.GET.get('search','')
-     if search_query:
-        product=Product.objects.filter(name__icontains=search_query)
-     else:
-          product=Product.objects.none()
-     return render(request,'WasafiRet/product.html',{'search_query':search_query,'product':product})
+    
+     product=Product.objects.filter(name__icontains=search_query)
+     context={
+          'product':product,
+          'search_query':search_query,
+     }
+     return render(request,'WasafiRet/product.html',context)
     
 def view_cart(request):
     cart=Cart.objects.filter(user=request.user).first()
