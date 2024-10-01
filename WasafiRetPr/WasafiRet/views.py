@@ -38,13 +38,12 @@ def product_create(request):
 
     return render(request, 'WasafiRet/product_create.html',{'form':form})
 def search(request):
-     category=[]
-     search_query=''
-     if request.method=='POST':
-          search_query=request.POST.get['search_query','']
-          if search_query:
-           category=Category.objects.filter(name__icontains=search_query)
-     return render(request,'WasafiRet/product.html',{'search_query':search_query,'category':category})
+     search_query=request.GET.get('search','')
+     if search_query:
+        product=Product.objects.filter(name__icontains=search_query)
+     else:
+          product=Product.objects.none()
+     return render(request,'WasafiRet/product.html',{'search_query':search_query,'product':product})
     
 def view_cart(request):
     cart=Cart.objects.filter(user=request.user).first()
