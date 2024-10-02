@@ -25,7 +25,7 @@
               <a class="nav-link" href="{% url 'view_cart' %}">Cart</a>
             </li>
           </ul>
-          {% comment %}
+
           <form method="POST" action="{% url 'search' %}">
             {% csrf_token %}
             <input
@@ -35,7 +35,6 @@
             />
             <button class="fas fa-search" type="submit">Search</button>
           </form>
-          {% endcomment %}
         </div>
       </nav>
     </header>
