@@ -1,8 +1,5 @@
-{% extends 'WasafiRet/base.html' %}
-{% load static %}
-{% block title %}Shopping Cart - Wasafi Ret{% endblock %}
-
-{% block content %}
+{% extends 'WasafiRet/base.html' %} {% load static %} {% block title %}Shopping
+Cart - Wasafi Ret{% endblock %} {% block content %}
 <div class="container mt-5">
   <h1>Your Cart</h1>
 
@@ -36,6 +33,28 @@
             style="max-height: 100px"
           />
           {% endif %}
+
+          <div class="text-right">
+            <a
+              href="{% url 'remove_cart' item.id %}"
+              class="btn btn-danger btn-lg"
+              >Remove</a
+            >
+          </div>
+          <form
+            method="POST"
+            action="{% url 'update_cart' item.id %}"
+            style="display: inline"
+          >
+            {% csrf_token %}
+            <input
+              type="number"
+              name="quantity"
+              value="{{ item.quantity }}"
+              min="1"
+            />
+            <button type="submit">Update</button>
+          </form>
         </td>
         <td>{{ item.product.name }}</td>
         <td>${{ item.product.price }}</td>
@@ -48,10 +67,14 @@
 
   <div class="row mb-5">
     <div class="col-md-6 text-left">
-      <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg">Continue Shopping</a>
+      <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg"
+        >Continue Shopping</a
+      >
     </div>
     <div class="col-md-6 text-right">
-      <a href="{% url 'checkout' %}" class="btn btn-success btn-lg">Proceed to Checkout</a>
+      <a href="{% url 'checkout' %}" class="btn btn-success btn-lg"
+        >Proceed to Checkout</a
+      >
     </div>
   </div>
 
