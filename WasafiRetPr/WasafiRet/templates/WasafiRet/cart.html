@@ -33,14 +33,6 @@ Cart - Wasafi Ret{% endblock %} {% block content %}
             style="max-height: 100px"
           />
           {% endif %}
-
-          <div class="text-right">
-            <a
-              href="{% url 'remove_cart' item.id %}"
-              class="btn btn-danger btn-lg"
-              >Remove</a
-            >
-          </div>
           <form
             method="POST"
             action="{% url 'update_cart' item.id %}"
@@ -55,6 +47,13 @@ Cart - Wasafi Ret{% endblock %} {% block content %}
             />
             <button type="submit">Update</button>
           </form>
+          <div class="text-left">
+            <a
+              href="{% url 'remove_cart' item.id %}"
+              class="btn btn-danger btn-sm"
+              >Remove</a
+            >
+          </div>
         </td>
         <td>{{ item.product.name }}</td>
         <td>${{ item.product.price }}</td>
