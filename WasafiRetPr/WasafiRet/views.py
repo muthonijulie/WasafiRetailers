@@ -3,7 +3,7 @@ from .models import Product,Category,Cart,CartItem
 from .forms import ProductCreateForm,CategoryForm
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.http import HttpResponseBadRequest
-
+from django.db.models import Q
 # Create your views here.
 def Home(request):
        return render(request, 'WasafiRet/home.html',)
@@ -49,14 +49,14 @@ def product_create(request):
 
     return render(request, 'WasafiRet/product_create.html',{'form':form})
 def search(request):
-     search_query=request.GET.get('search','')
+     search_query=request.POST.get('search_query','')
     
-     product=Product.objects.filter(name__icontains=search_query)
+     products=Product.objects.filter(Q(name__icontains=search_query))
      context={
-          'product':product,
+          'products':products,
           'search_query':search_query,
      }
-     return render(request,'WasafiRet/product.html',context)
+     return render(request,'WasafiRet/search.html',context)
     
 def view_cart(request):
     cart=Cart.objects.filter(user=request.user).first()
