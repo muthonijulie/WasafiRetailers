@@ -11,28 +11,28 @@
             {% csrf_token %}
             
             <div class="form-group">
-                <label for="id_full_name">Full Name</label>
-                {{ form.full_name|add_class:"form-control col-md-6" }}  
+                <label for="id_shipping_name">Full Name</label>
+                {{ form.shipping_name|add_class:"form-control col-md-6" }}  
             </div>
             <div class="form-group">
-                <label for="id_email">Email</label>
-                {{ form.email|add_class:"form-control col-md-6" }}  
-            </div>
-            <div class="form-group">
-                <label for="id_address">Address</label>
-                {{ form.address|add_class:"form-control col-md-6" }}  
+                <label for="id_shipping_email">Email</label>
+                {{ form.shipping_email|add_class:"form-control col-md-6" }}  
             </div>
             <div class="form-group">
                 <label for="id_phone_number">Phone Number</label>
                 {{ form.phone_number|add_class:"form-control col-md-6" }}  
             </div>
             <div class="form-group">
-                <label for="id_city">City</label>
-                {{ form.city|add_class:"form-control col-md-6" }}  
+                <label for="id_shipping_address">Address</label>
+                {{ form.shipping_address|add_class:"form-control col-md-6" }}  
             </div>
             <div class="form-group">
-                <label for="id_zip_code">Zip Code</label>
-                {{ form.zip_code|add_class:"form-control col-md-6" }}  
+                <label for="id_shipping_city">City</label>
+                {{ form.shipping_city|add_class:"form-control col-md-6" }}  
+            </div>
+            <div class="form-group">
+                <label for="id_shipping_zip_code">Zip Code</label>
+                {{ form.shipping_zip_code|add_class:"form-control col-md-6" }}  
             </div>
             
             <h3>Your Cart</h3>

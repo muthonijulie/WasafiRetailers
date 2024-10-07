@@ -42,4 +42,9 @@ def checkout(request):
 
 def order_confirmation(request, order_id):
     order = Order.objects.get(id=order_id)
-    return render(request, 'order/order_confirmation.html', {'order': order})
+    order_total = order.get_order_total()  
+    return render(request, 'order/order_confirmation.html', {
+        'order': order,
+        'order_total': order_total, 
+    })
+
