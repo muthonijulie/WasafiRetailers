@@ -1,0 +1,57 @@
+{% extends 'WasafiRet/base.html' %}
+{% load static %}
+
+{% block title %}Order Confirmation Page - Wasafi Ret{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Order Confirmation</h1>
+
+    <div class="alert alert-success">
+        <strong>Thank you for your order!</strong>
+        <p>Your order has been successfully placed. Here are the details:</p>
+    </div>
+
+    <h3>Client Details</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Full Name:</strong> {{ order.shipping_name }}</p>
+            <p><strong>Email:</strong> {{ order.shipping_email }}</p>
+            <p><strong>Phone Number:</strong> {{ order.phone_number }}</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Shipping Address:</strong> {{ order.shipping_address }}</p>
+            <p><strong>City:</strong> {{ order.shipping_city }}</p>
+            <p><strong>Zip Code:</strong> {{ order.shipping_zip_code }}</p>
+        </div>
+    </div>
+
+    <h3>Order Details</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>${{ item.product.price|floatformat:2 }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.get_total|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3" class="font-weight-bold">Total</td>
+                <td class="font-weight-bold">${{ order.get_order_total|floatformat:2 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="#" class="btn btn-primary">Pay</a>
+</div>
+{% endblock %}

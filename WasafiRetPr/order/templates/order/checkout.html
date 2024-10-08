@@ -1,0 +1,67 @@
+{% extends 'WasafiRet/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Checkout - Wasafi Ret{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Checkout</h1>
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_shipping_name">Full Name</label>
+                {{ form.shipping_name|add_class:"form-control col-md-6" }}  
+            </div>
+            <div class="form-group">
+                <label for="id_shipping_email">Email</label>
+                {{ form.shipping_email|add_class:"form-control col-md-6" }}  
+            </div>
+            <div class="form-group">
+                <label for="id_phone_number">Phone Number</label>
+                {{ form.phone_number|add_class:"form-control col-md-6" }}  
+            </div>
+            <div class="form-group">
+                <label for="id_shipping_address">Address</label>
+                {{ form.shipping_address|add_class:"form-control col-md-6" }}  
+            </div>
+            <div class="form-group">
+                <label for="id_shipping_city">City</label>
+                {{ form.shipping_city|add_class:"form-control col-md-6" }}  
+            </div>
+            <div class="form-group">
+                <label for="id_shipping_zip_code">Zip Code</label>
+                {{ form.shipping_zip_code|add_class:"form-control col-md-6" }}  
+            </div>
+            
+            <h3>Your Cart</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>${{ item.product.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.get_total }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3" class="font-weight-bold">Total</td>
+                        <td class="font-weight-bold">${{ cart_total }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-success">Place Order</button>
+        </form>
+    </div>
+{% endblock %}

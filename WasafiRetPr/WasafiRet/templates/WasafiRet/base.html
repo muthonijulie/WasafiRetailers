@@ -29,6 +29,7 @@
               <a class="nav-link" href="{% url 'view_cart' %}">Cart</a>
             </li>
           </ul>
+
           <form method="POST" action="{% url 'search' %}">
             {% csrf_token %}
             <input
