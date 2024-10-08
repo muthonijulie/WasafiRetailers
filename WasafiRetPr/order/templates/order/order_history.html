@@ -1,0 +1,37 @@
+{% extends 'WasafiRet/base.html' %}
+{% load static %}
+
+{% block title %}Order History - Wasafi Ret{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Order History</h1>
+
+    {% if orders %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.created_at|date:"F j, Y" }}</td>
+                <td>{{ order.status }}</td>
+                <td>${{ order.get_order_total|floatformat:2 }}</td>
+                <td><a href="{% url 'orders:order_confirmation' order.id %}" class="btn btn-info">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-warning">You have no orders yet.</div>
+    {% endif %}
+</div>
+{% endblock %}

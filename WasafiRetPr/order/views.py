@@ -48,3 +48,7 @@ def order_confirmation(request, order_id):
         'order_total': order_total, 
     })
 
+@login_required
+def order_history(request):
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'order/order_history.html', {'orders': orders})
