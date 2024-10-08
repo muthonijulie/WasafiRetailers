@@ -1,11 +1,36 @@
 {% extends 'WasafiRet/base.html' %} {% load static %} {% block title %}Shopping
-Flash-flashsales{% endblock %} {% block content %} {% for flashsale in
-flash_sales %}
-<a
-  href="{% url 'product_detail' flashsale.product.id %}"
-  class="itm"
-  data-track-onclick="eecPromo"
->
-  <img src="{{ flashsale.image.url }}" class="-fw" alt="{{ sale.name }}" />
-</a>
-{% endfor %} {% endblock %}
+Flash-flashsales{% endblock %} {% block content %} {% block title %} Flash Sales
+- Wasafi Ret {% endblock %} {% block content %}
+<div class="container mt-5">
+  <h1>Active Flash Sales</h1>
+  <ul class="list-group">
+    {% for flashsale in flashsales %}
+    <li
+      class="list-group-item d-flex justify-content-between align-items-center"
+    >
+      <img
+        src="{{ flashsale.product.image.url }}"
+        alt="{{ flashsale.product.name }}"
+        class="img-thumbnail"
+        style="width: 100px; height: 100px"
+      />
+
+      <div>
+        <h5>{{ flashsale.product.name }}</h5>
+        <p>
+          Now at
+          <span class="text-success font-weight-bold"
+            >{{ flashsale.discount_price }}</span
+          >
+        </p>
+        <p>Until {{ flashsale.end_time|date:"F j, Y, g:i a" }}</p>
+      </div>
+    </li>
+    {% empty %}
+    <li class="list-group-item text-danger">
+      No active flash sales at the moment.
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

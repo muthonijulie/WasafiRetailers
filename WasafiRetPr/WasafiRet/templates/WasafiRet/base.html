@@ -28,7 +28,17 @@
         </div>
       </nav>
     </header>
-
+    <h1>Active Flash Sales</h1>
+    <ul>
+      {% for flashsale in flashsales %}
+      <li>
+        {{ flashsale.product.name }} - Now at {{ flashsale.discount_price }}
+        until {{ flashsale.end_time }}
+      </li>
+      {% empty %}
+      <li>No active flash sales at the moment.</li>
+      {% endfor %}
+    </ul>
     <footer class="text-center mt-5">
       <p>&copy; 2024 Wasafi Ret. All rights reserved.</p>
     </footer>
