@@ -1,0 +1,11 @@
+{% extends 'WasafiRet/base.html' %} {% load static %} {% block title %}Shopping
+Flash-flashsales{% endblock %} {% block content %} {% for flashsale in
+flash_sales %}
+<a
+  href="{% url 'product_detail' flashsale.product.id %}"
+  class="itm"
+  data-track-onclick="eecPromo"
+>
+  <img src="{{ flashsale.image.url }}" class="-fw" alt="{{ sale.name }}" />
+</a>
+{% endfor %} {% endblock %}
