@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'order',
     'widget_tweaks',
     'payment',
+    'flashsale',
 ]
 
 MIDDLEWARE = [

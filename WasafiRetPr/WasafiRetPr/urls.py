@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('WasafiRet.urls')),
     path('orders/', include('order.urls')),
     path('payment/', include('payment.urls')),
+    path('flashsale/',include('flashsale.urls')),
 
    
 ]
