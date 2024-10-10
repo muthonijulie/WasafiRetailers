@@ -1,0 +1,21 @@
+{% extends 'WasafiRet/base.html' %} {% load static %}{% block title %}flashsale-
+flashale {% endblock %} {% block content %}
+<div class="container mt-5">
+  <h1>Flash Sale Items</h1>
+  <div class="flash-sales-list">
+    {% for item in flashsale %}
+    <div class="flash-sale-item">
+      <h2>{{ item.name }}</h2>
+      <img src="{{ item.image.url }}" alt="{{ item.name }}" />
+
+      <p>Price: {{ item.price }}</p>
+      <p>Discount: {{ item.discount }}%</p>
+      <p>Valid until: {{ item.end_time }}</p>
+    </div>
+    {% empty %}
+    <p>No flash sale items available.</p>
+
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
