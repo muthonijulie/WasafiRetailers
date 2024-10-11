@@ -28,6 +28,14 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'view_cart' %}">Cart</a>
             </li>
+            <li>
+              <a class="nav-link" href="{% url 'orders:order_history' %}"
+                >Order History</a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="{% url 'flashsale'  %}">Flashsale</a>
+            </li>
           </ul>
 
           <form method="POST" action="{% url 'search' %}">

@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'order',
     'widget_tweaks',
     'payment',
+    'flashsale',  
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
