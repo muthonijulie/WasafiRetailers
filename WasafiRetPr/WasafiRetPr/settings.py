@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'payment',
     'flashsale',  
+    'authentication'
 ]
 
 
