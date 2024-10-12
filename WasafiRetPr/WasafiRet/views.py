@@ -6,6 +6,7 @@ from django.http import HttpResponseBadRequest
 from django.db.models import Q
 from flashsale.models import Flashsale
 from django.utils import timezone
+from review.models import Review
 # Create your view here.
 def Home(request):
        return render(request, 'WasafiRet/home.html',)
@@ -108,7 +109,8 @@ def checkout(request):
 
 def detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    return render(request, 'WasafiRet/product_detail.html', {'product': product})
+    reviews=product.reviews.all()
+    return render(request, 'WasafiRet/product_detail.html', {'product': product,'reviews':reviews})
 
 def main(request):
      current=timezone.now()

@@ -1,0 +1,21 @@
+{% extends 'WasafiRet/base.html' %} {% load static %} {% block title %}Reviews-
+Review{% endblock %} {% block content %}
+<div class="container mt-5">
+  <h1>Reviews</h1>
+
+  <div>
+    <h3>Reviews</h3>
+    {% for review in reviews %}
+    <p>{{ review.user }} - {{ review.rating }} stars</p>
+    <p>{{ review.review_text }}</p>
+    {% endfor %}
+  </div>
+
+  <h3>Write a Review</h3>
+  <form method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit">Submit Review</button>
+  </form>
+</div>
+
+{% endblock %}
