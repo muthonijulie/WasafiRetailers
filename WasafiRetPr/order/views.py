@@ -39,7 +39,7 @@ def checkout(request):
         'cart_total': cart_total,
     })
 
-
+@login_required
 def order_confirmation(request, order_id):
     order = Order.objects.get(id=order_id)
     order_total = order.get_order_total()  
