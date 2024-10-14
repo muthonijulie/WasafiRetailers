@@ -5,12 +5,16 @@ from WasafiRet.models import Product
 User = get_user_model()
 
 class Order(models.Model):
+    STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Completed', 'Completed'),
+        ('Canceled', 'Canceled'),  
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=20, choices=[('Pending', 'Pending'), ('Completed', 'Completed')], default='Pending')
-  
-   
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
+
     shipping_name = models.CharField(max_length=255)
     shipping_email = models.EmailField()
     phone_number = models.CharField(max_length=20)
@@ -20,6 +24,7 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order {self.id} by {self.user.username}"
+
     def get_order_total(self):
         return sum(item.get_total() for item in self.items.all())
 
