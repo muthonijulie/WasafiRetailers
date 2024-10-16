@@ -40,6 +40,20 @@ product.name }} - Wasafi Ret{% endblock %} {% block content %}
           >View Reviews</a
         >
       </div>
+      <h2>Reviews</h2>
+      {% if reviews %}
+      <ul>
+        {% for review in reviews %}
+        <li>
+          <strong>{{ review.user }}</strong> rated {{ review.rating }}<br />
+          {{ review.comment }}<br />
+          <small>Posted on: {{ review.created_at }}</small>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No reviews yet.</p>
+      {% endif %}
     </div>
   </div>
 </div>

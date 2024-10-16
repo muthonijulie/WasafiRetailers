@@ -9,24 +9,24 @@ def register(request):
         if form.is_valid():
             user=form.save()
             login(request,user)
-            return redirect('product')
+            return redirect('product_list')
     else:
             form=UserCreationForm()
     return render(request,'accounts/register.html',{'form':form})
 
 
-def login(request):
+def user_login(request):
     if request.method=='POST':
         form=AuthenticationForm(request,data=request.POST)
         if form.is_valid():
             user=form.get_user()
             login(request,user)
-            return redirect('product')
+            return redirect('product_list')
     else:
             form=AuthenticationForm()
     return render(request,'accounts/login.html',{'form':form})
 
-def logout(request):
+def user_logout(request):
     logout(request)
     return redirect('auth:login')
 

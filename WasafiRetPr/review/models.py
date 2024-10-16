@@ -11,4 +11,4 @@ class Review(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user}-{self.product} ({self.rating})'
+        return f"Review by {self.user}-{self.product} (Rating:{self.rating})"
