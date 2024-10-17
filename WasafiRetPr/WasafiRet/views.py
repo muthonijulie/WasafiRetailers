@@ -115,6 +115,7 @@ def checkout(request):
 def detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     reviews=product.reviews.all()
+    
     return render(request, 'WasafiRet/product_detail.html', {'product': product,'reviews':reviews})
 
 def main(request):

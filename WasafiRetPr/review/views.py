@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .forms import ReviewForm
 from WasafiRet.models import Product
+from .models import Review
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -18,3 +19,4 @@ def add_review(request,product_id):
     else:
         form=ReviewForm()
     return render(request,'review/review.html', {'form':form,'product':product})
+
