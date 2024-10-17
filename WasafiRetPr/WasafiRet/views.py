@@ -6,12 +6,11 @@ from django.http import HttpResponseBadRequest
 from django.db.models import Q
 from flashsale.models import Flashsale
 from django.utils import timezone
-<<<<<<< HEAD
 
 
-=======
+
 from review.models import Review
->>>>>>> master
+
 # Create your view here.
 def Home(request):
        return render(request, 'WasafiRet/home.html',)
