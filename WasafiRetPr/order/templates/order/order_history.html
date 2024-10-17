@@ -8,30 +8,49 @@
     <h1>Order History</h1>
 
     {% if orders %}
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Total</th>
-                <th>Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for order in orders %}
-            <tr>
-                <td>{{ order.id }}</td>
-                <td>{{ order.created_at|date:"F j, Y" }}</td>
-                <td>{{ order.status }}</td>
-                <td>${{ order.get_order_total|floatformat:2 }}</td>
-                <td><a href="{% url 'orders:order_confirmation' order.id %}" class="btn btn-info">View</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.created_at|date:"F j, Y" }}</td>
+                    <td>
+                        <span class="badge 
+                            {% if order.status == 'Pending' %}badge-warning
+                            {% elif order.status == 'Completed' %}badge-success
+                            {% else %}badge-secondary{% endif %}">
+                            {{ order.status }}
+                        </span>
+                    </td>
+                    <td>${{ order.get_order_total|floatformat:2 }}</td>
+                    <td>
+                        <a href="{% url 'orders:order_confirmation' order.id %}" class="btn btn-info">View</a>
+                    </td>
+                   <td>
+                        {% if order.status == "Pending" %}
+                            <a href="{% url 'orders:cancel_order' order.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel this order?');">Cancel</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     {% else %}
-    <div class="alert alert-warning">You have no orders yet.</div>
+    <div class="alert alert-warning">
+        You have no orders yet. <a href="{% url 'product_list' %}" class="alert-link">Start shopping now!</a>
+    </div>
     {% endif %}
 </div>
 {% endblock %}

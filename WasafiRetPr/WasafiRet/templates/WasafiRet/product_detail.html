@@ -36,7 +36,9 @@ product.name }} - Wasafi Ret{% endblock %} {% block content %}
         <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary"
           >Add to Cart</a
         >
-        <button class="btn btn-secondary">View Reviews</button>
+        <a href="{% url 'add_review' product.id %}" class="btn btn-secondary"
+          >View Reviews</a
+        >
       </div>
     </div>
   </div>
