@@ -6,7 +6,11 @@ from django.http import HttpResponseBadRequest
 from django.db.models import Q
 from flashsale.models import Flashsale
 from django.utils import timezone
+
+
+
 from review.models import Review
+
 # Create your view here.
 def Home(request):
        return render(request, 'WasafiRet/home.html',)
@@ -25,6 +29,7 @@ def category_create(request):
             form=CategoryForm()
           
       return render(request,'WasafiRet/category_form.html',{'form':form})
+
 def product_list(request):
     products=Product.objects.all()
     paginator=Paginator(products,10,orphans=10,allow_empty_first_page=True)
