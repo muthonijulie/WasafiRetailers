@@ -2,22 +2,37 @@
 List - Wasafi Ret{% endblock %} {% block content %}
 <div class="container mt-5">
   <h1>Flash Sale Items</h1>
-  <div class="flash-sales-list">
-    {% for item in flashsale %}
-    <div class="flash-sale-item">
-      <a href="{% url 'flashsale' %}">
-        <img src="{{ item.image.url }}" alt="{{ item.name }}" />
-        <h2>{{ item.name }}</h2>
-        <p>Price: {{ item.price }}</p>
-        <p>Discount: {{ item.discount }}%</p>
-        <p>Valid until: {{ item.end_time }}</p>
-      </a>
-    </div>
-    {% empty %}
+ 
+      <div class="row mb-4">
+        {% for item in flashsale %}
+        <div class="col-md-3 mb-4">
+          <a href="{% url 'flashsale' %}">
+            <img src="{{ item.image.url }}" alt="{{ item.name }}" class="img-fluid"/>
+          </a>
+        </div>
+        {% empty %}
     <p>No flash sale items available.</p>
 
     {% endfor %}
-  </div>
+  </div> 
+        
+
+            {% comment %}
+            <p>Price: {{ item.price }}</p>
+            {% endcomment %}
+          </a>
+          {% comment %}
+          <p>Discount: {{ item.discount }}%</p>
+          <p>Valid until: {{ item.end_time }}</p>
+          {% endcomment %}
+        {% comment %} </div>
+      </div>
+     {% endcomment %}
+    {% comment %} {% empty %}
+    <p>No flash sale items available.</p>
+
+    {% endfor %}
+  </div> {% endcomment %}
   <h1 class="mb-4">Product List</h1>
   <div class="row">
     {% for product in products %}

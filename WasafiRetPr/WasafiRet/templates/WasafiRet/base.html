@@ -28,6 +28,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'view_cart' %}">Cart</a>
             </li>
+            {% comment %}
             <li>
               <a class="nav-link" href="{% url 'orders:order_history' %}"
                 >Order History</a
@@ -36,6 +37,7 @@
             <li>
               <a class="nav-link" href="{% url 'flashsale'  %}">Flashsale</a>
             </li>
+            {% endcomment %}
           </ul>
 
           <form method="POST" action="{% url 'search' %}">
@@ -65,16 +67,23 @@
       {% if messages %}
       <div class="container mt-3">
         {% for message in messages %}
-          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+        <div
+          class="alert alert-{{ message.tags }} alert-dismissible fade show"
+          role="alert"
+        >
+          {{ message }}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         {% endfor %}
       </div>
       {% endif %}
-
     </header>
 
     <main class="container mt-5">{% block content %}{% endblock %}</main>

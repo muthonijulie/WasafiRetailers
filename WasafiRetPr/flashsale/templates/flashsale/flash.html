@@ -2,11 +2,11 @@
 flashale {% endblock %} {% block content %}
 <div class="container mt-5">
   <h1>Flash Sale Items</h1>
-  <div class="flash-sales-list">
+  <div class="row mb-4">
     {% for item in flashsale %}
-    <div class="flash-sale-item">
+    <div class="col-md-3 mb-4">
       <h2>{{ item.name }}</h2>
-      <img src="{{ item.image.url }}" alt="{{ item.name }}" />
+      <img src="{{ item.image.url }}" alt="{{ item.name }}" class="img-fluid" />
 
       <p>Price: {{ item.price }}</p>
       <p>Discount: {{ item.discount }}%</p>
@@ -14,7 +14,6 @@ flashale {% endblock %} {% block content %}
     </div>
     {% empty %}
     <p>No flash sale items available.</p>
-
     {% endfor %}
   </div>
 </div>
