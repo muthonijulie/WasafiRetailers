@@ -32,6 +32,9 @@ def category_create(request):
 
 def product_list(request):
     products=Product.objects.all()
+    current = timezone.now()
+    flashsale=Flashsale.objects.filter(start_time__lte=current,end_time__gte=current)
+   
     paginator=Paginator(products,10,orphans=10,allow_empty_first_page=True)
     page=request.GET.get('page')
     try:
@@ -42,7 +45,7 @@ def product_list(request):
          paginated_products=paginator.page(paginator.num_pages)
 
          
-    return render(request, 'WasafiRet/product.html',{'products':paginated_products})
+    return render(request, 'WasafiRet/product.html',{'products':paginated_products,'flashsale':flashsale})
 
 def product_create(request):
     if request.method == 'POST':
