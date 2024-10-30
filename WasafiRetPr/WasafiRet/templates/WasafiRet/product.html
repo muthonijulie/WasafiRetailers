@@ -2,37 +2,36 @@
 List - Wasafi Ret{% endblock %} {% block content %}
 <div class="container mt-5">
   <h1>Flash Sale Items</h1>
- 
-      <div class="row mb-4">
-        {% for item in flashsale %}
-        <div class="col-md-3 mb-4">
+  <div class="slideshow">
+    <div class="row mb-4">
+      {% for item in flashsale %}
+      <div class="myslides">
+        <div class="col-md-4 mb-4">
           <a href="{% url 'flashsale' %}">
-            <img src="{{ item.image.url }}" alt="{{ item.name }}" class="img-fluid"/>
+            <img
+              src="{{ item.image.url }}"
+              alt="{{ item.name }}"
+              class="img-fluid flashsale-img"
+            />
           </a>
         </div>
-        {% empty %}
-    <p>No flash sale items available.</p>
-
-    {% endfor %}
-  </div> 
-        
-
-            {% comment %}
-            <p>Price: {{ item.price }}</p>
-            {% endcomment %}
-          </a>
-          {% comment %}
-          <p>Discount: {{ item.discount }}%</p>
-          <p>Valid until: {{ item.end_time }}</p>
-          {% endcomment %}
-        {% comment %} </div>
       </div>
-     {% endcomment %}
-    {% comment %} {% empty %}
-    <p>No flash sale items available.</p>
+      {% empty %}
+      <p>No flash sale items available.</p>
+      {% endfor %}
+    </div>
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
 
+  <div style="text-align: center">
+    {% for item in flashsale %}
+    <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>
     {% endfor %}
-  </div> {% endcomment %}
+  </div>
+
+  <script src="{% static 'js/flash.js' %}"></script>
+
   <h1 class="mb-4">Product List</h1>
   <div class="row">
     {% for product in products %}
