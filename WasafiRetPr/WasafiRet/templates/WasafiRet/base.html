@@ -17,11 +17,19 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <style>
-      .body {
-        background-color: pink;
+      body {
+        background-color: #854f6c;
       }
+      header {
+        padding: 20px;
+        background-color: #e6dbe1;
+        border-bottom: 2px solid #ddd;
+      }
+
       .slideshow {
         margin: 0 auto;
+        width: 150%;
+        max-width: 1200px;
       }
       .row {
         display: flex;
@@ -73,23 +81,33 @@
       }
       .flashsale-img {
         width: 100%;
-        max-width: 1800px;
+        max-width: 1200px;
         height: 500px;
       }
 
       @media (max-width: 768px) {
         .flashsale-img {
-          width: 100%;
+          width: 60%;
           height: 200px;
         }
       }
 
-      @media (min-width: 769px) {
+      @media (min-width: 769px) and (max-width: 1200px) {
         .flashsale-img {
-          width: 85%;
+          width: 100%;
           max-width: 1000px;
           height: 200px;
         }
+      }
+      @media (min-width: 1201px) {
+        .flashsale-img {
+          width: 180%;
+          height: 300px;
+        }
+      }
+      .navbar-nav .nav-item {
+        margin-left: 10px;
+        margin-right: 10px;
       }
     </style>
   </head>
@@ -97,8 +115,41 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#">Wasafi Ret</a>
+        <div class="col-6 d-flex justify-content-center">
+          <form
+            class="mx-auto"
+            style="width: 40%"
+            method="POST"
+            action="{% url 'search' %}"
+          >
+            {% csrf_token %}
+            <div class="input-group">
+              <input
+                class="form-control w-50"
+                type="text"
+                name="search_query"
+                placeholder="Search products"
+              />
+              <div class="input-group-append">
+                <button class="fa fa-search" type="submit">Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="{% url 'product_list' %}">Product</a>
             </li>
@@ -118,15 +169,6 @@
             {% endcomment %}
           </ul>
 
-          <form method="POST" action="{% url 'search' %}">
-            {% csrf_token %}
-            <input
-              type="text"
-              name="search_query"
-              placeholder="Search products"
-            />
-            <button class="fa fa-search" type="submit">Search</button>
-          </form>
           {% if user.is_authenticated %}
           <li>
             <a href="{% url 'auth:logout' %}">Logout</a>
