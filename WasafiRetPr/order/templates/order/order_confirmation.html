@@ -52,6 +52,12 @@
         </tbody>
     </table>
 
-    <a href="#" class="btn btn-primary">Pay</a>
+       <!-- Form to initiate STK push -->
+       <form action="{% url 'initiate-stk-push' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Pay</button>
+    </form>
+
+
 </div>
 {% endblock %}
