@@ -4,7 +4,14 @@ from .forms import ProductCreateForm,CategoryForm
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.http import HttpResponseBadRequest
 from django.db.models import Q
-# Create your views here.
+from flashsale.models import Flashsale
+from django.utils import timezone
+
+
+
+from review.models import Review
+
+# Create your view here.
 def Home(request):
        return render(request, 'WasafiRet/home.html',)
 
@@ -22,8 +29,12 @@ def category_create(request):
             form=CategoryForm()
           
       return render(request,'WasafiRet/category_form.html',{'form':form})
+
 def product_list(request):
     products=Product.objects.all()
+    current = timezone.now()
+    flashsale=Flashsale.objects.filter(start_time__lte=current,end_time__gte=current)
+   
     paginator=Paginator(products,10,orphans=10,allow_empty_first_page=True)
     page=request.GET.get('page')
     try:
@@ -34,7 +45,7 @@ def product_list(request):
          paginated_products=paginator.page(paginator.num_pages)
 
          
-    return render(request, 'WasafiRet/product.html',{'products':paginated_products})
+    return render(request, 'WasafiRet/product.html',{'products':paginated_products,'flashsale':flashsale})
 
 def product_create(request):
     if request.method == 'POST':
@@ -106,4 +117,12 @@ def checkout(request):
 
 def detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    return render(request, 'WasafiRet/product_detail.html', {'product': product})
+    reviews=product.reviews.all()
+    
+    return render(request, 'WasafiRet/product_detail.html', {'product': product,'reviews':reviews})
+
+def main(request):
+     current=timezone.now()
+     flashsale=Flashsale.objects.filter(start_time__lte=current,end_time__gte=current)
+     return render(request, 'WasafiRet/product.html',{'flashsale':flashsale})
+     

@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages  
 from .models import Order, OrderItem
 from .forms import OrderForm
 from WasafiRet.models import Cart, CartItem
@@ -39,7 +40,7 @@ def checkout(request):
         'cart_total': cart_total,
     })
 
-
+@login_required
 def order_confirmation(request, order_id):
     order = Order.objects.get(id=order_id)
     order_total = order.get_order_total()  
@@ -48,3 +49,22 @@ def order_confirmation(request, order_id):
         'order_total': order_total, 
     })
 
+@login_required
+def cancel_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+ 
+    if order.status == 'Pending':
+        order.status = 'Canceled'
+        order.save()
+        
+        messages.success(request, "Your order has been canceled.")
+    else:
+       
+        messages.error(request, "This order cannot be canceled.")
+
+    return redirect('orders:order_history') 
+
+@login_required
+def order_history(request):
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'order/order_history.html', {'orders': orders})

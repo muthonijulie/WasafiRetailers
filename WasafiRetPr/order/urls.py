@@ -6,6 +6,8 @@ app_name = 'orders'
 urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     path('order_confirmation/<int:order_id>/', views.order_confirmation, name='order_confirmation'),
+    path('history/', views.order_history, name='order_history'),
+    path('cancel/<int:order_id>/', views.cancel_order, name='cancel_order'),
 ]
 
 
