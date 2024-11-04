@@ -16,6 +16,13 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <head>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      />
+    </head>
+
     <style>
       body {
         background-color: #854f6c;
@@ -155,7 +162,9 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'view_cart' %}">Cart</a>
+              <a class="nav-link" href="{% url 'view_cart' %}"
+                ><i class="fas fa-shopping-cart"></i>Cart</a
+              >
             </li>
             {% comment %}
             <li>
@@ -171,7 +180,9 @@
 
           {% if user.is_authenticated %}
           <li>
-            <a href="{% url 'auth:logout' %}">Logout</a>
+            <a href="{% url 'auth:logout' %}"
+              ><i class="fas fa-user"></i>User</a
+            >
           </li>
           {% else %}
           <li>

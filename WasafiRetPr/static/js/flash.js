@@ -22,7 +22,7 @@ function showSlides() {//controls slide visibility
   }
   dots[slideIndex-1].className+="activate";
   
- setTimeout(showSlides, 2000);//change slide after every 2 seconds
+ setTimeout(showSlides, 4000);//change slide after every 2 seconds
 }
 // increment or decrement the slide index by n
 function plusSlides(n){
