@@ -4,15 +4,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
     <title>Register</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #854f6c;
+        margin: 0;
+        padding: 20px;
+        height: 100vh;
+      }
+    </style>
   </head>
   <body>
-    <h1>Registration form</h1>
-    <form method="post">
-      {% csrf_token %} {{form.as_p}}
-      <button type="submit">Register now</button>
-    </form>
+    <div class="container">
+      <h1>Registration form</h1>
+      <form method="post">
+        {% csrf_token %} {{form.as_p}}
+        <button type="submit">Register now</button>
+      </form>
+    </div>
   </body>
 </html>

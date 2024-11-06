@@ -16,13 +16,15 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
       body {
         background-color: #854f6c;
       }
       header {
         padding: 20px;
-        background-color: #e6dbe1;
+        background-color: #DFB6B2;
         border-bottom: 2px solid #ddd;
       }
 
@@ -65,16 +67,6 @@
         right: 10px;
       }
 
-      .dot {
-        cursor: pointer;
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-      }
 
       .active {
         background-color: #717171;
@@ -106,9 +98,37 @@
         }
       }
       .navbar-nav .nav-item {
-        margin-left: 10px;
-        margin-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+      .navbar-text {
+          margin-right: 15px; 
+          font-weight: bold; 
+          color: #333; 
+          display: inline-block;
+          list-style:none;
       }
+
+      .dropdown-menu {
+          min-width: 200px; 
+      }
+
+      .user-greeting {
+          list-style: none;
+          margin: 0;
+          padding: 0; 
+      }
+
+      .settings-dropdown .dropdown-menu {
+          list-style: none; 
+          padding: 0; 
+      }
+
+      .settings-dropdown .dropdown-item {
+          text-decoration: none; 
+      }
+
     </style>
   </head>
   <body>
@@ -155,33 +175,36 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'view_cart' %}">Cart</a>
+              <a class="nav-link" href="{% url 'view_cart' %}"><i class="fas fa-shopping-cart"></i>Cart</a>
             </li>
-            {% comment %}
-            <li>
-              <a class="nav-link" href="{% url 'orders:order_history' %}"
-                >Order History</a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="{% url 'flashsale'  %}">Flashsale</a>
-            </li>
-            {% endcomment %}
+            
+          
+           <li class="nav-item user-greeting">
+            <span class="navbar-text">
+<i class= "fas fa-user"></i>
+          {% if user.is_authenticated %} Hi {{ user.first_name }} {% else %} Hi
+          User {% endif %}</span></li>
+           <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+          
+                  Settings</a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            {% if user.is_authenticated %}
+               <a class="dropdown-item" href="{% url 'auth:profile' %}">
+                 Profile
+                </a>
+                <a class="dropdown-item" href="{% url 'auth:logout' %}">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            {% else %}
+                <a class="dropdown-item" href="{% url 'auth:login' %}">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+                <a class="dropdown-item" href="{% url 'auth:register' %}">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </a>
+            {% endif %}
           </ul>
-
-          {% if user.is_authenticated %}
-          <li>
-            <a href="{% url 'auth:logout' %}">Logout</a>
-          </li>
-          {% else %}
-          <li>
-            <a href="{% url 'auth:login' %}">Login</a>
-          </li>
-
-          <li>
-            <a href="{% url 'auth:register' %}">Register</a>
-          </li>
-          {% endif %}
         </div>
       </nav>
     </header>
