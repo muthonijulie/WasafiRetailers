@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    <title>Profile</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #854f6c;
+        margin: 0;
+        padding: 20px;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container profile-info">
+      <h1>Profile</h1>
+
+      <div class="profile-photo">
+        {% if user.profile.photo %}
+        <img src="{{ user.profile.photo.url }}" alt="Profile Photo" />
+        {% else %}
+        <img
+          src="{% static 'images/default_profile.png' %}"
+          alt="Default Profile Photo"
+        />
+        {% endif %}
+      </div>
+
+      <p><strong>Name:</strong> {{ user.get_full_name }}</p>
+      <p><strong>Username:</strong> {{ user.username }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p>
+        <strong>Date of Birth:</strong> {{
+        user.profile.date_of_birth|default:"N/A" }}
+      </p>
+      <p><strong>Address:</strong> {{ user.profile.address|default:"N/A" }}</p>
+      <p>
+        <strong>Phone Number:</strong> {{ user.profile.phone|default:"N/A" }}
+      </p>
+      <p><strong>Member Since:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
+
+      <!-- Action Buttons -->
+      <button onclick="window.location.href='{% url 'auth:edit_profile' %}'">
+        Edit Profile
+      </button>
+      <div class="activity-summary">
+        <h2>Recent Activities</h2>
+
+        {% if user.profile.recent_activities %}
+        <ul>
+          {% for activity in user.profile.recent_activities %}
+          <li>{{ activity }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No recent activities.</p>
+        {% endif %}
+      </div>
+
+      <div class="security-settings">
+        <h2>Security Settings</h2>
+        <p>Manage your account security.</p>
+        <button
+          onclick="window.location.href='{% url 'auth:security_settings' %}'"
+        >
+          Security Settings
+        </button>
+      </div>
+      {% comment %}
+      <p>Name:{{user.get_full_name}}</p>
+      <p>Email:{{user.email}}</p>
+      {% endcomment %}
+    </div>
+  </body>
+</html>
