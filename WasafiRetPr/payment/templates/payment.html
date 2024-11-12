@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+</head>
+<body>
+    <h1>Make a Payment</h1>
+    <form method="post" action="{% url 'payment:initiate_stk_push' %}">
+    
+        {% csrf_token %}
+        
+        <!-- Phone number field -->
+        <label for="id_phone_number">Phone number:</label>
+        {{ form.phone_number }}
+        <br>
+        
+        <!-- Amount field -->
+        <label for="id_amount">Amount:</label>
+        {{ form.amount }}
+        <br><br>
+        
+        <!-- Submit button -->
+        <button type="submit">Pay Now</button>
+    </form>
+</body>
+</html>
