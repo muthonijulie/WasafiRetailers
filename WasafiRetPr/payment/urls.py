@@ -5,7 +5,7 @@ app_name = "payment"
 
 urlpatterns = [
     path("", views.payment_view, name="payment"),
-    path('initiate-stk-push/', views.initiate_stk_push, name='initiate-stk-push'),
+    path('initiate-stk-push/', views.initiate_stk_push, name='initiate_stk_push'),
 
    
 ]
