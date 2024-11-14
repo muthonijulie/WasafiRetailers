@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm
 from .forms import UserRegistrationForm,ProfileEditForm
 from django.contrib.auth import login,logout,update_session_auth_hash
@@ -36,10 +36,11 @@ def user_logout(request):
     return redirect('auth:login')
 @login_required
 def user_profile(request):
-    return render(request,'accounts/profile.html',{'user':request.user})
+    profile = get_object_or_404(Profile, user=request.user)
+    return render(request,'accounts/profile.html',{'user':request.user,'profile':profile})
 
 def edit_profile_view(request):
-    profile=Profile.objects.get(user=request.user)
+    profile=get_object_or_404(Profile,user=request.user)
     
     if request.method=='POST':
         form=ProfileEditForm(request.POST,request.FILES,instance=profile)
