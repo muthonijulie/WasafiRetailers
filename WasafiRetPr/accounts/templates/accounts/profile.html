@@ -7,18 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
     <title>Profile</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #854f6c;
-        margin: 0;
-        padding: 20px;
-        height: 100vh;
-      }
-    </style>
+ 
   </head>
   <body>
     <div class="container profile-info">
@@ -39,7 +28,7 @@
       <p><strong>Username:</strong> {{ user.username }}</p>
       <p><strong>Email:</strong> {{ user.email }}</p>
 
-      <p><strong>Member Since:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
+      np><strong>Member Since:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
 
       <!-- Action Buttons -->
       <button onclick="window.location.href='{% url 'auth:edit_profile' %}'">

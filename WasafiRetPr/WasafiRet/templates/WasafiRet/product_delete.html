@@ -1,0 +1,13 @@
+{% extends 'WasafiRet/base.html' %} {% block content %}
+
+<h1>Delete product</h1>
+
+<div class="card-body">
+  <form method="POST" action="{% url 'product_delete' product.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger me-2">Delete product</button>
+    <a href="{% url 'product_list' %}" class="btn btn-primary">Cancel</a>
+  </form>
+
+  {% endblock content %}
+</div>

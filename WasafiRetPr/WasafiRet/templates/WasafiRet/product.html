@@ -42,14 +42,12 @@ List - Wasafi Ret{% endblock %} {% block content %}
           src="{{ product.image.url }}"
           class="card-img-top"
           alt="Product Image"
-          style="width: 100%; height: 150px; object-fit: cover"
         />
         {% else %}
         <img
           src="{% static 'images/default-product.jpg' %}"
           class="card-img-top"
           alt="Default Product Image"
-          style="width: 100%; height: 150px; object-fit: cover"
         />
         {% endif %}
         <div class="card-body">

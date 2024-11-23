@@ -1,0 +1,11 @@
+{% extends 'WasafiRet/base.html' %} {% load static %} {% block title %}Category
+update - Wasafi Ret{% endblock %} {% block content %}
+<h1>Update category</h1>
+
+<form method="POST" action="{% url 'Category_update' product.id %}">
+  {% csrf_token %}{{form.as_p}}
+
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+{% endblock content %}

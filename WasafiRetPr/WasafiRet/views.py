@@ -6,29 +6,42 @@ from django.http import HttpResponseBadRequest
 from django.db.models import Q
 from flashsale.models import Flashsale
 from django.utils import timezone
-
-
-
 from review.models import Review
 
 # Create your view here.
-def Home(request):
-       return render(request, 'WasafiRet/home.html',)
+
 
 def category_list(request):
      categories=Category.objects.all()
      return render(request,'WasafiRet/category_list.html',{'categories':categories}) 
 
 def category_create(request):
-      if request.method == 'POST':
-        form=CategoryForm(request.POST,request.FILES)
-        if form.is_valid():
+     if request.method == 'POST':
+          form=CategoryForm(request.POST,request.FILES)
+          if form.is_valid():
             form.save()
             return redirect('product_list')
-      else:
-            form=CategoryForm()
+     else:
+          form=CategoryForm()
           
-      return render(request,'WasafiRet/category_form.html',{'form':form})
+     return render(request,'WasafiRet/category_create.html',{'form':form})
+def category_update(request,id):
+     categories=get_object_or_404(Category,id=id)
+     if request.method=='POST':
+          form=CategoryForm(request.POST,request.FILES,instance=categories)
+          if form.is_valid():
+               form.save()
+               return redirect('product_list')
+          else:
+               form=CategoryForm(instance=categories)
+          return render(request,'WasafiRet/category_update.html',{'form':form,'categories':categories})
+def category_delete(request,id):
+     categories=get_object_or_404(Category,id=id)
+     if request.method=='POST':
+          categories.delete()
+          return redirect('product_list')
+     return render(request,'WasafiRet/category_delete.html',{'categories':categories})
+
 
 def product_list(request):
     products=Product.objects.all()
@@ -48,17 +61,36 @@ def product_list(request):
     return render(request, 'WasafiRet/product.html',{'products':paginated_products,'flashsale':flashsale})
 
 def product_create(request):
-    if request.method == 'POST':
-        form=ProductCreateForm(request.POST,request.FILES)
-        if form.is_valid():
+     if request.method == 'POST':
+          form=ProductCreateForm(request.POST,request.FILES)
+          if form.is_valid():
             form.save()
             return redirect('product_list')
-    else:
-            form=ProductCreateForm()
-          
+     else:
+          form=ProductCreateForm()
+     return render(request, 'WasafiRet/product_create.html',{'form':form})
 
 
-    return render(request, 'WasafiRet/product_create.html',{'form':form})
+
+def product_update(request,id):
+     product=get_object_or_404(Product,id=id)
+     if request.method=='POST':
+          form=ProductCreateForm(request.POST,request.FILES,instance=product)
+          if form.is_valid():
+               form.save()
+               return redirect('product_list')
+          else:
+               form=ProductCreateForm(instance=product)
+          return render(request,'WasafiRet/product_update.html',{'form':form,'product':product})
+def product_delete(request,id):
+     product=get_object_or_404(Product,id=id)
+     if request.method=='POST':
+        product.delete()
+        return redirect('product_list')
+    
+     return render(request,'WasafiRet/product_delete.html',{'product':product})
+
+
 def search(request):
      search_query=request.POST.get('search_query','')
     

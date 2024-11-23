@@ -5,8 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Wasafi Ret{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-
+  
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -16,120 +15,9 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
-    <style>
-      body {
-        background-color: #854f6c;
-      }
-      header {
-        padding: 20px;
-        background-color: #DFB6B2;
-        border-bottom: 2px solid #ddd;
-      }
-
-      .slideshow {
-        margin: 0 auto;
-        width: 150%;
-        max-width: 1200px;
-      }
-      .row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .myslides {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-      }
-
-      .prev,
-      .next {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        width: auto;
-        margin-top: -22px;
-        padding: 16px;
-        color: white;
-        font-weight: bold;
-        font-size: 18px;
-        transition: 0.6s ease;
-        border-radius: 0 3px 3px 0;
-        user-select: none;
-      }
-      .prev {
-        right: 10px;
-      }
-
-      .next {
-        right: 10px;
-      }
-
-
-      .active {
-        background-color: #717171;
-      }
-      .flashsale-img {
-        width: 100%;
-        max-width: 1200px;
-        height: 500px;
-      }
-
-      @media (max-width: 768px) {
-        .flashsale-img {
-          width: 60%;
-          height: 200px;
-        }
-      }
-
-      @media (min-width: 769px) and (max-width: 1200px) {
-        .flashsale-img {
-          width: 100%;
-          max-width: 1000px;
-          height: 200px;
-        }
-      }
-      @media (min-width: 1201px) {
-        .flashsale-img {
-          width: 180%;
-          height: 300px;
-        }
-      }
-      .navbar-nav .nav-item {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-      .navbar-text {
-          margin-right: 15px; 
-          font-weight: bold; 
-          color: #333; 
-          display: inline-block;
-          list-style:none;
-      }
-
-      .dropdown-menu {
-          min-width: 200px; 
-      }
-
-      .user-greeting {
-          list-style: none;
-          margin: 0;
-          padding: 0; 
-      }
-
-      .settings-dropdown .dropdown-menu {
-          list-style: none; 
-          padding: 0; 
-      }
-
-      .settings-dropdown .dropdown-item {
-          text-decoration: none; 
-      }
-
-    </style>
+    
   </head>
   <body>
     <header>
@@ -138,7 +26,7 @@
         <div class="col-6 d-flex justify-content-center">
           <form
             class="mx-auto"
-            style="width: 40%"
+           
             method="POST"
             action="{% url 'search' %}"
           >
@@ -177,8 +65,12 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'view_cart' %}"><i class="fas fa-shopping-cart"></i>Cart</a>
             </li>
-            
-          
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'category_create' %}">Category create</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="{% url 'product_create' %}">Product create</a>
+            </li>
            <li class="nav-item user-greeting">
             <span class="navbar-text">
 <i class= "fas fa-user"></i>
